@@ -1,0 +1,37 @@
+<h1>Listing contacs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Lastname</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>Description</th>
+      <th>Birthdate</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @contacs.each do |contac| %>
+      <tr>
+        <td><%= contac.name %></td>
+        <td><%= contac.lastname %></td>
+        <td><%= contac.phone %></td>
+        <td><%= contac.email %></td>
+        <td><%= contac.description %></td>
+        <td><%= contac.birthdate %></td>
+        <td><%= contac.user_id %></td>
+        <td><%= link_to 'Show', contac %></td>
+        <td><%= link_to 'Edit', edit_contac_path(contac) %></td>
+        <td><%= link_to 'Destroy', contac, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Contac', new_contac_path %>
