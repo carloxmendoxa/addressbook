@@ -1,6 +1,7 @@
 class ContacsController < ApplicationController
   before_action :set_contac, only: [:show, :edit, :update, :destroy]
-
+  before_action :get_users, only: [:new, :edit]
+  
   # GET /contacs
   # GET /contacs.json
   def index
@@ -15,6 +16,7 @@ class ContacsController < ApplicationController
   # GET /contacs/new
   def new
     @contac = Contac.new
+    @users = User.order("lastname").map {|user| [user.name+" "+user.lastname, user.id]}
   end
 
   # GET /contacs/1/edit
@@ -70,5 +72,9 @@ class ContacsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def contac_params
       params.require(:contac).permit(:name, :lastname, :phone, :email, :description, :birthdate, :user_id)
+    end
+    
+    def get_users
+      @users = User.order("lastname").map {|user| [user.name+" "+user.lastname, user.id]}
     end
 end
